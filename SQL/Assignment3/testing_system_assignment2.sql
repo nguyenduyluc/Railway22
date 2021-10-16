@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS Testing_system_assignment_1;
-CREATE DATABASE Testing_system_assignment_1;
-USE 			Testing_system_assignment_1;
+DROP DATABASE IF EXISTS testing_system_assignment2;
+CREATE DATABASE IF NOT EXISTS testing_system_assignment2;
+USE testing_system_assignment2;
 
 DROP TABLE IF EXISTS
 Departments,
@@ -101,35 +101,3 @@ CREATE TABLE exam_questions(
     FOREIGN KEY(question_id) REFERENCES questions(question_id),
     FOREIGN KEY(exam_id) REFERENCES exams(exam_id)
 );
-
-SELECT * FROM departments;
-SELECT * FROM	positions;
-SELECT * FROM  accounts;
-DELETE FROM accounts WHERE account_id = 1;
-UPDATE accounts SET fullname = "duy luc" WHERE account_id = 4;
-
-INSERT INTO departments ( department_name )
-VALUE 					("doloremque"),
-						("magni"),
-                        ("similique"),
-                        ("sed"),
-						("placeat"),
-                        ("ut"),
-                        ("voluptatum"),
-                        ("accusamus"),
-                        ("quo");
-INSERT INTO positions 	( position_name )
-VALUE 					("PM"),
-						("Scrum Master"),
-                        ("Dev"),
-                        ('Test');
-                        
-INSERT INTO accounts (email       					,    	username			,    	fullname      			, department_id		, position_id			, create_date)
-VALUE 				("melisa.jacobs@example.org"	,    "viviane.balistreri"	,		"Miss Andreane Lehner"	, 		5			,   1					,'2020-03-05'),
-					("caterina10@example.com"		,		"aditya71"			,			"Elody Runte DDS"	,		1			,   2					,'2020-03-05'),
-                    ("wolff.zelda@example.org"		,"mckayla86"				,"Flossie Pacocha"				,		2			,   3					,'2020-03-07'),
-                    ("donnelly.everett@example.net"	,"quinten.sipes"			,"Moriah Collier MD"			, 	 	4			,   4					,'2020-03-10'),
-                    ("spinka.brian@example.org"		,"demetris62"				,"Tatyana Erdman I"				,		6			,   3					,'2020-04-05'),
-                    ("alex60@example.net"			,"lynn01"					,"Kayla Denesik"				,		8			,   1					,'2020-04-07'),
-                    ("einar63@example.net"			,"grant.eric"				,"Kathleen"						, 		9			,   2					,'2020-04-07');
-						
