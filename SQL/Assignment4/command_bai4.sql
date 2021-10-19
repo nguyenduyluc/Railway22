@@ -34,7 +34,7 @@ WHERE position_name = "Dev";
 -- Question 4: Viết lệnh để lấy ra danh sách các phòng ban có >3 nhân viên
 SELECT D.department_name, COUNT(A.account_id) SO_NHAN_VIEN
 FROM departments D
-JOIN `Accounts` A ON D.department_id = A.department_id
+INNER JOIN `Accounts` A ON D.department_id = A.department_id
 GROUP BY A.department_id
 HAVING count(A.department_id) >=3;
 
@@ -43,8 +43,8 @@ HAVING count(A.department_id) >=3;
 
  SELECT  GROUP_CONCAT(Q.content) AS DANH_SACH_CAU_HOI , E.title AS TEN_DE_THI , COUNT(Q.question_id) SO_CAU_HOI 
  FROM questions Q
- JOIN exam_questions EQ ON Q.question_id = EQ.question_id
- JOIN exams E ON EQ.exam_id = E.exam_id
+ INNER JOIN exam_questions EQ ON Q.question_id = EQ.question_id
+ INNER JOIN exams E ON EQ.exam_id = E.exam_id
  GROUP BY EQ.exam_id
  HAVING count(EQ.question_id) = (   SELECT  count(question_id)
 							FROM exam_questions
@@ -87,13 +87,13 @@ LEFT JOIN answers A ON Q.question_id = A.question_id;
 -- Question 9: Thống kê số lượng account trong mỗi group
 SELECT G.group_name, count(GA.account_id) SO_THANH_VIEN
 FROM group_accounts GA
-JOIN `groups` G ON GA.group_id = G.group_id
+INNER JOIN `groups` G ON GA.group_id = G.group_id
 GROUP BY GA.group_id ;
 
 -- Question 10: Tìm chức vụ có ít người nhất
 SELECT P.position_name , COUNT(A.account_id) so_nguoi,GROUP_CONCAT(A.fullname) ten
 FROM positions P
- JOIN accounts A ON P.position_id = A.position_id 
+INNER JOIN accounts A ON P.position_id = A.position_id 
 GROUP BY A.position_id
  HAVING COUNT(A.account_id ) = (SELECT COUNT(account_id )
 								 FROM accounts
@@ -105,17 +105,17 @@ GROUP BY A.position_id
 
 SELECT D.department_name,P.position_name TEN_CHUC_VU ,COUNT(A.position_id ) SO_CHUC_VU
 FROM departments D
-JOIN accounts A ON D.department_id = A.department_id
-JOIN positions P ON A.position_id = P.position_id
+INNER JOIN accounts A ON D.department_id = A.department_id
+INNER JOIN positions P ON A.position_id = P.position_id
 GROUP BY A.department_id ,A.position_id 
 ORDER BY department_name ; 
 
 -- Question 12: Lấy thông tin chi tiết của câu hỏi bao gồm: thông tin cơ bản của question, loại câu hỏi, ai là người tạo ra câu hỏi, câu trả lời là gì, .
 SELECT   Q.content AS CAU_HOI ,T.type_name AS LOAI_CAU_HOI , C.fullname AS TEN_NGUOI_TAO, GROUP_CONCAT(A.content)  AS CAU_TRA_LOI
 FROM answers A
-JOIN questions Q  ON Q.question_id = A.question_id
-JOIN type_questions T ON Q.type_id = T.type_id
-JOIN accounts C ON Q.creator_id = C.account_id
+INNER JOIN questions Q  ON Q.question_id = A.question_id
+INNER JOIN type_questions T ON Q.type_id = T.type_id
+INNER JOIN accounts C ON Q.creator_id = C.account_id
 GROUP BY Q.content   ;
 
 
@@ -141,24 +141,24 @@ WHERE A.answer_id IS NULL;
 -- a) Lấy các account thuộc nhóm thứ 1
 SELECT A.account_id , A.username,A.email ,A.fullname
 FROM accounts A
-JOIN group_accounts GA ON GA.account_id  = A.account_id 
+INNER JOIN group_accounts GA ON GA.account_id  = A.account_id 
 WHERE GA.group_id = 1;
 
 -- b) Lấy các account thuộc nhóm thứ 2
 SELECT A.account_id , A.username,A.email ,A.fullname
 FROM accounts A
-JOIN group_accounts GA ON GA.account_id  = A.account_id 
+INNER JOIN group_accounts GA ON GA.account_id  = A.account_id 
 WHERE GA.group_id = 3;
 
 -- c) Ghép 2 kết quả từ câu a) và câu b) sao cho không có record nào trùng nhau
 SELECT A.account_id , A.username,A.email ,A.fullname
 FROM accounts A
-JOIN group_accounts GA ON GA.account_id  = A.account_id 
+INNER JOIN group_accounts GA ON GA.account_id  = A.account_id 
 WHERE GA.group_id = 1
 UNION
 SELECT A.account_id , A.username,A.email ,A.fullname
 FROM accounts A
-JOIN group_accounts GA ON GA.account_id  = A.account_id 
+INNER JOIN group_accounts GA ON GA.account_id  = A.account_id 
 WHERE GA.group_id = 3 ; 
 
 -- Question 18:
