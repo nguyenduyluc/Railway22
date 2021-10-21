@@ -120,6 +120,10 @@ GROUP BY Q.content   ;
 
 
 -- Question 13: Lấy ra số lượng câu hỏi của mỗi loại tự luận hay trắc nghiệm
+SELECT T.type_name AS TEN_TRẮC_NGHIEM_TƯ_LUAN , count(Q.content) AS SO_CAU_HOI
+FROM type_questions  T
+INNER JOIN questions Q ON T.type_id = Q.type_id
+GROUP BY T.type_id ; 
 
 -- Question 14:Lấy ra group không có account nào
 
