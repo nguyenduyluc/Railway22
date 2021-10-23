@@ -94,27 +94,27 @@ SELECT * FROM car_order ;
 -- 5. Viết 1 thủ tục (có CustomerID parameter) để in ra thông tin của các đơn
 -- hàng đã đặt hàng bao gồm: tên của khách hàng, mã đơn hàng, số lượng oto
 -- và tên hãng sản xuất.
- SELECT	   CT.`name` ,CO.order_id , C.maker , CO.amount 
- FROM customer CT
- INNER JOIN  car_order CO ON CT.customer_id = CO.customer_id
- INNER JOIN car C ON C.car_id = CO.car_id
- GROUP BY CO.order_id 
- ORDER BY COUNT(CO.amount);
- 
- USE bai_tesr
- DROP PROCEDURE IF EXISTS thong_tin_khach_hang 
- DELIMITER $$
- CREATE PROCEDURE thong_tin_khach_hang(IN CustomerID INT , OUT nameCustomer VARCHAR (20), OUT order_id VARCHAR (100) , OUT maker VARCHAR (20), OUT amount VARCHAR (100))
-		BEGIN
-			 SELECT	   CT.`name` ,CO.order_id , C.maker , CO.amount INTO nameCustomer, order_id, maker, amount
-			 FROM customer CT
-			 INNER JOIN  car_order CO ON CT.customer_id = CO.customer_id
-			 INNER JOIN car C ON C.car_id = CO.car_id
-             WHERE CT.customer_id = CustomerID ;
-		END$$
-DELIMITER ;
+ -- SELECT	   CT.`name` ,CO.order_id , C.maker , CO.amount 
+--  FROM customer CT
+--  INNER JOIN  car_order CO ON CT.customer_id = CO.customer_id
+--  INNER JOIN car C ON C.car_id = CO.car_id
+--  GROUP BY CO.order_id 
+--  ORDER BY COUNT(CO.amount);
+--  
+--  USE bai_tesr
+--  DROP PROCEDURE IF EXISTS thong_tin_khach_hang 
+--  DELIMITER $$
+--  CREATE PROCEDURE thong_tin_khach_hang(IN CustomerID INT , OUT nameCustomer VARCHAR (20), OUT order_id VARCHAR (100) , OUT maker VARCHAR (20), OUT amount VARCHAR (100))
+-- 		BEGIN
+-- 			 SELECT	   CT.`name` ,CO.order_id , C.maker , CO.amount INTO nameCustomer, order_id, maker, amount
+-- 			 FROM customer CT
+-- 			 INNER JOIN  car_order CO ON CT.customer_id = CO.customer_id
+-- 			 INNER JOIN car C ON C.car_id = CO.car_id
+--              WHERE CT.customer_id = CustomerID ;
+-- 		END$$
+-- DELIMITER ;
 
-     CALL  thong_tin_khach_hang(2) ;
+--      CALL  thong_tin_khach_hang(2) ;
         
 
  
